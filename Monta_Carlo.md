@@ -27,9 +27,11 @@ $$V_{\text{target}}(s_t) = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \ ... \ + \
 
 Your value network's prediction $V_{\phi}(s_t)$ is your estimate for $V(s_t)$.
 
-## 2. Computing the Action-Value Function $Q(s_t, a_t)$
+# 2. Computing the Action-Value Function $Q(s_t, a_t)$
+
 $Q^{\pi}(s_t, a_t)$ is the expected total discounted reward from taking action $a_t$ in state $s_t$ and then following policy $\pi$ thereafter.
-# In Actor-Critic methods like PPO, we almost never directly estimate a Q-value network. Instead, we express $Q(s_t, a_t)$ in terms of $V(s_t)$ and the advantage.
+
+In Actor-Critic methods like PPO, we almost never directly estimate a Q-value network. Instead, we express $Q(s_t, a_t)$ in terms of $V(s_t)$ and the advantage.
 
 This is based on a fundamental identity. The Q-value can be thought of as the value of the state plus the extra advantage gained from taking a specific action:
 
@@ -61,6 +63,6 @@ Here is the complete, step-by-step process for how $V$ and the implied $Q$ are c
     This $\hat{R}_t$ is your best empirical estimate of $Q(s_t, a_t)$.
 
 6.  **Update the Value Network (Critic):** Train $V_{\phi}$ to get better at predicting these empirical returns $\hat{R}_t$. This improves your estimate of $V(s)$ for the next iteration.
-    $$L_{\text{critic}}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
+    $L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$
 
 7.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
