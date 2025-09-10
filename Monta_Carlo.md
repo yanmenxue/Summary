@@ -63,7 +63,8 @@ Here is the complete, step-by-step process for how $V$ and the implied $Q$ are c
     This $\hat{R}_t$ is your best empirical estimate of $Q(s_t, a_t)$.
 
 6.  **Update the Value Network (Critic):** Train $V_{\phi}$ to get better at predicting these empirical returns $\hat{R}_t$. This improves your estimate of V(s) for the next iteration
-   
-$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$
 
-8.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
+
+$$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
+
+7.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
