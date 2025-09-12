@@ -17,7 +17,7 @@ $
 
 方程 (1) 是一个一阶线性微分方程，其标准解为：
 $
-h(t) = e^{\mathbf{A}(t - t_0)}h(t_0) + \int_{t_0}^{t} e^{\mathbf{A}(t - \tau)}\mathbf{B}x(\tau)d\tau
+h(t) = e^{A(t - t_0)}h(t_0) + \int_{t_0}^{t} e^{A(t - \tau)}Bx(\tau)d\tau
 $
 
 ### 步骤 2：应用零阶保持（ZOH）假设
