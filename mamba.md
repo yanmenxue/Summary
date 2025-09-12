@@ -7,10 +7,8 @@ $y(t)  =\mathbf{C} h(t)+\mathbf{D} x(t)$
 要得到离散时间系统：
 
 $
-\begin{aligned}
 h_t &= \overline{A}h_{t-1} + \overline{B}x_t \quad (3) \\
 y_t &= Ch_t + Dx_t \quad (4)
-\end{aligned}
 $
 
 ## 推导过程
