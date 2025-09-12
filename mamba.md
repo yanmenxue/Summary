@@ -5,12 +5,12 @@ $h^{\prime}(t) =\mathbf{A} h(t)+\mathbf{B} x(t)$
 $y(t)  =\mathbf{C} h(t)+\mathbf{D} x(t)$
 
 要得到离散时间系统：
-
-$
+$$
+\begin{aligned}
 h_t &= \overline{A}h_{t-1} + \overline{B}x_t \quad (3) \\
 y_t &= Ch_t + Dx_t \quad (4)
-$
-
+\end{aligned}
+$$
 ## 推导过程
 
 ### 步骤 1：解连续时间微分方程
