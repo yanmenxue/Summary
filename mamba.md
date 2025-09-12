@@ -74,32 +74,26 @@ $
 $
 
 则离散时间系统为：
-$$
-\begin{aligned}
-h_k &= \overline{\mathbf{A}}h_{k-1} + \overline{\mathbf{B}}x_k \\
-y_k &= \mathbf{C}h_k + \mathbf{D}x_k
-\end{aligned}
-$$
+$
+h_k = \overline{\mathbf{A}}h_{k-1} + \overline{\mathbf{B}}x_k \\
+y_k = \mathbf{C}h_k + \mathbf{D}x_k
+$
 
 ---
 
 ## 简化版本（常用形式）
 
-在实际应用中，经常使用以下近似形式：
-$$
-\begin{aligned}
+在实际应用中，经常使用以下近似形式
+$
 \overline{\mathbf{A}} &= e^{\mathbf{A}\Delta} \\
 \overline{\mathbf{B}} &= (\mathbf{A}\Delta)^{-1}(e^{\mathbf{A}\Delta} - \mathbf{I})\mathbf{B}\Delta \approx (\mathbf{A}\Delta)^{-1}(e^{\mathbf{A}\Delta} - \mathbf{I})\mathbf{B}\Delta
-\end{aligned}
-$$
+$
 
 或者当 $\mathbf{A}\Delta$ 很小时，使用泰勒展开近似：
-$$
-\begin{aligned}
+$
 \overline{\mathbf{A}} &\approx \mathbf{I} + \mathbf{A}\Delta \\
 \overline{\mathbf{B}} &\approx \mathbf{B}\Delta
-\end{aligned}
-$$
+$
 
 ---
 
