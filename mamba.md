@@ -8,8 +8,8 @@ $y(t)  =\mathbf{C} h(t)+\mathbf{D} x(t)$
 
 $
 \begin{aligned}
-h_t &= \overline{\mathbf{A}}h_{t-1} + \overline{\mathbf{B}}x_t \quad (3) \\
-y_t &= \mathbf{C}h_t + \mathbf{D}x_t \quad (4)
+h_t &= \overline{A}h_{t-1} + \overline{B}x_t \quad (3) \\
+y_t &= Ch_t + Dx_t \quad (4)
 \end{aligned}
 $
 
