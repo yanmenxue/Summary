@@ -1,5 +1,5 @@
 ## Monta Carlo
-$\int p(x) f(x) dx = E_{x \sim p(x)} f(x) = \frac{\sum_{i=1}^n f(x_i)}{n}$ if we sample $x_i$, i = 1,2,...,n from p(x) 
+$\int p(x) f(x) dx = E_{x \sim p(x)} f(x) = \frac{\sum_{i=1}^n f(x_i)}{n}$ (大数定律) if we sample $x_i$, i = 1,2,...,n from p(x) 
 
 if we sample $x_i$ from $p_1(x)$, we can estimate $E_{x \sim p_2(x)} f(x)$ as follows:  
 
