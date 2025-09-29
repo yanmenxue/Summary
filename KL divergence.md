@@ -28,9 +28,9 @@ $
 
 2．低偏倚：（ $\left.k_2\right)$ 的期望是一个f－散度，其形式为：
 
-$
+$$
 \mathbb{E}_q\left[k_2\right]=\mathbb{E}_q\left[\frac{1}{2}(\log r)^2\right]
-$
+$$
 
 
 # 无偏且低方差的估计器 #
