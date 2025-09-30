@@ -59,7 +59,7 @@ D_{K L}\left(\pi_\theta \| \pi_{ref}\right)=\frac{\pi_{ref}\left(o_{i, t} \mid q
 $$
 
 
-其中，$$(pi_\theta)$$ 表示策略网络，$\left(\phi_{r e f}\right)$ 表示参考策略，$\left(o_{i, t}\right)$ 表示在时间 $(t)$ 的观测，$(q)$ 和 $\left(o_{i,<t}\right.$ ）分别表示上下文和历史观测。令 $\left(r=\frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}\right)$ ，该估计器可重写为：
+其中，$$(pi_{\theta})$$ 表示策略网络，$\left(\phi_{r e f}\right)$ 表示参考策略，$\left(o_{i, t}\right)$ 表示在时间 $(t)$ 的观测，$(q)$ 和 $\left(o_{i,<t}\right.$ ）分别表示上下文和历史观测。令 $\left(r=\frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}\right)$ ，该估计器可重写为：
 
 $$
 k_3=(r-1)-\log r
