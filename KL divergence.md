@@ -17,9 +17,7 @@ $$
 
 Schulman提出了一种替代估计器：
 
-$
-k_2=\frac{1}{2}\left(\log \frac{p(x)}{q(x)}\right)^2=\frac{1}{2}(\log r)^2
-$
+$k_2=\frac{1}{2}\left(\log \frac{p(x)}{q(x)}\right)^2=\frac{1}{2}(\log r)^2$
 
 
 这个估计器 $\left(k_2\right)$ 虽然有偏，但方差显著低于 $\left(k_1\right)$ 。其优点在于：
