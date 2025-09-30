@@ -53,7 +53,7 @@ $$
 
 # DeepSeek GRPO中的应用#
 
-DeepSeek的GRPO算法直接采用了Schulman提出的无偏估计器（ $k_3$ ）。具体来说，GRPO使用以下估计器来近似 $\left(D_{K L}\left(\pi_\theta \| \pi_{r e f}\right)\right.$ ：
+DeepSeek的GRPO算法直接采用了Schulman提出的无偏估计器（ $k_3$ ）。具体来说，GRPO使用以下估计器来近似 $D_{K L}\left(\pi_\theta \| \pi_{r e f}\right)$ ：
 
 $$
 D_{K L}\left(\pi_\theta \| \pi_{r e f}\right)=\frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}-\log \frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}-1
