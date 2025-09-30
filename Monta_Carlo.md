@@ -72,7 +72,7 @@ $$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
 
 7.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
 
-# 1．价值函数定义
+## 1．AC算法和SAC算法##
 状态价值函数：
 
 $$
