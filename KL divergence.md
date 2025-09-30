@@ -24,7 +24,7 @@ $$k_2=\frac{1}{2}\left(\log \frac{p(x)}{q(x)}\right)^2=\frac{1}{2}(\log r)^2$$
 
 1．始终为正：每个样本都反映了 $(p)$ 和 $(q)$ 之间的差异，且结果非负，与KL散度的性质一致。
 
-2．低偏倚：（ $\left.k_2\right)$ 的期望是一个f－散度，其形式为：
+2．低偏倚：$k_2$ 的期望是一个f－散度，其形式为：
 
 $$
 \mathbb{E}_q\left[k_2\right]=\mathbb{E}_q\left[\frac{1}{2}(\log r)^2\right]
