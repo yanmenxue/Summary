@@ -71,3 +71,32 @@ Here is the complete, step-by-step process for how $V$ and the implied $Q$ are c
 $$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
 
 7.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
+
+# 1．价值函数定义
+状态价值函数：
+
+$$
+V^\pi(s)=\mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t r_t \mid s_0=s, \pi\right]
+$$
+
+
+动作价值函数：
+
+$$
+Q^\pi(s, a)=\mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t r_t \mid s_0=s, a_0=a, \pi\right]
+$$
+
+
+2．TD误差（Temporal Difference Error）
+
+$$
+\delta_t=r_t+\gamma V_\phi\left(s_{t+1}\right)-V_\phi\left(s_t\right)
+$$
+
+
+3．参数更新公式
+Critic 更新（价值函数拟合）：
+
+$$
+\phi \leftarrow \phi+\alpha_c \delta_t \nabla_\phi V_\phi\left(s_t\right)
+$$
