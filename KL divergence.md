@@ -47,14 +47,14 @@ k_3=(r-1)-\log r
 $$
 
 
-由于对数的凹性，（ $\log r \leq r-1$ ），因此（ $k_3$ ）始终为正。这个估计器不仅无偏，而且方差低于（ $\left.k_1\right)$ 。实验表明，当真实 KL 散度为 0.5 时，$\left(k_3\right)$ 的标准差为真实值的1．7倍，低于 $\left(k_2\right)$ 的1．73倍，且无偏。
+由于对数的凹性，（ $\log r \leq r-1$ ），因此（ $k_3$ ）始终为正。这个估计器不仅无偏，而且方差低于（ $\left.k_1\right)$ 。实验表明，当真实 KL 散度为 0.5 时，$k_3$ 的标准差为真实值的1．7倍，低于 $k_2$ 的1．73倍，且无偏。
 
 # DeepSeek GRPO中的应用#
 
 DeepSeek的GRPO算法直接采用了Schulman提出的无偏估计器（ $k_3$ ）。具体来说，GRPO使用以下估计器来近似 $D_{K L}\left(\pi_\theta \| \pi_{r e f}\right)$:
 
 $$
-D_{K L}\left(\pi_\theta \| \pi_{r e f}\right)=\frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}
+D_{K L}\left(\pi_\theta \| \pi_{ref}\right)=\frac{\pi_{ref}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}
 -\log \frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}-1
 $$
 
