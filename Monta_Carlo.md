@@ -101,10 +101,13 @@ $$
 在代码中通常这样处理（.detach()，这就是在告诉自动微分系统：不要计算目标值的梯度），
 
 计算TD误差
+
 td_target = reward + gamma * value_net(next_state).detach()
+
 td_error = td_target - value_net(current_state)
 
 损失函数
+
 value_loss = 0.5 * (td_error ** 2).mean()
 
 
