@@ -78,3 +78,34 @@ Actor－Critic 结合了策略梯度（Actor）和价值函数（Critic）两个
 - $\pi_\theta(a \mid s)$ ：参数为 $\theta$ 的策略（Actor）
 - $Q_w(s, a)$ ：参数为 $w$ 的动作价值函数（Critic）
 - 状态 $s_t$ ，动作 $a_t$ ，奖励 $r_t$ ，折扣因子 $\gamma$
+
+1.2 算法流程
+
+Critic更新（用 TD 误差更新 $Q_w$ ）
+TD 误差：
+
+$$
+\delta_t=r_t+\gamma Q_w\left(s_{t+1}, a_{t+1}\right)-Q_w\left(s_t, a_t\right)
+$$
+
+
+参数更新（梯度上升，最小化 TD 误差的平方）：
+
+$$
+w \leftarrow w+\alpha_w \delta_t \nabla_w Q_w\left(s_t, a_t\right)
+$$
+
+
+或者如果用的是优势函数 $A_w(s, a)=Q_w(s, a)-V_w(s)$ ，则 Critic 可能是更新 $V$ 。
+Actor 更新（策略梯度）：
+
+$$
+\theta \leftarrow \theta+\alpha_\theta \nabla_\theta \log \pi_\theta\left(a_t \mid s_t\right) Q_w\left(s_t, a_t\right)
+$$
+
+
+更常见的是用优势函数 $A_w\left(s_t, a_t\right)$ 代替 $Q_w$ 来减少方差：
+
+$$
+\theta \leftarrow \theta+\alpha_\theta \nabla_\theta \log \pi_\theta\left(a_t \mid s_t\right) A_w\left(s_t, a_t\right)
+$$
