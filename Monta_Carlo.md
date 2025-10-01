@@ -96,7 +96,7 @@ w \leftarrow w+\alpha_w \delta_t \nabla_w Q_w\left(s_t, a_t\right)
 $$
 
 
-或者如果用的是优势函数 $A_w(s, a)=Q_w(s, a)-V_w(s)$ ，则 Critic 可能是更新 $V$ 。
+或者如果用的是优势函数 $A_w(s, a)=Q_w(s, a)-V_w(s)$ ，则 Critic 可能是更新 $V_w$ 。
 
 $$
 A\left(s_t, a_t\right)=r_t+\gamma V_w\left(s_{t+1}\right)-V_w\left(s_t\right)
@@ -116,7 +116,9 @@ $$
 A\left(s_t, a_t\right)=r_t+\gamma V_w\left(s_{t+1}\right)-V_w\left(s_t\right)
 $$
 
-Actor 更新（策略梯度）：
+最小化优势函数来优化$V_w$.
+
+1.2.2 Actor 更新（策略梯度）：
 
 $$
 \theta \leftarrow \theta+\alpha_\theta \nabla_\theta \log \pi_\theta\left(a_t \mid s_t\right) Q_w\left(s_t, a_t\right)
