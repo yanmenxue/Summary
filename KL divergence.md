@@ -47,7 +47,7 @@ k_3=(r-1)-\log r
 $$
 
 
-由于对数的凹性，（ $\log r \leq r-1$ ），因此 $k_3$ 始终为正。这个估计器不仅无偏，而且方差低于 $k_1$ 。实验表明，当真实 KL 散度为 0.5 时，$k_3$ 的标准差为真实值的1．7倍，低于 $k_2$ 的1．73倍，且无偏。
+由于对数的凹性，（ $\log r \leq r-1$ ），因此 $k_3$ 始终为正。这个估计器不仅无偏，而且方差低于 $k_1$ 。实验表明，当真实 KL 散度为 0.5 时， $k_3$ 的标准差为真实值的1．7倍，低于 $k_2$ 的1．73倍，且无偏。
 
 # DeepSeek GRPO中的应用 #
 
@@ -59,7 +59,7 @@ D_{K L}\left(\pi_\theta \| \pi_{ref}\right)=\frac{\pi_{ref}\left(o_{i, t} \mid q
 $$
 
 
-其中，$(\pi_{\theta})$ 表示策略网络，$\left(\pi_{r e f}\right)$ 表示参考策略，$\left(o_{i, t}\right)$ 表示在时间 $(t)$ 的观测，$(q)$ 和 $\left(o_{i,<t}\right.$ ）分别表示上下文和历史观测。令 $\left(r=\frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}\right)$ ，该估计器可重写为：
+其中，$(\pi_{\theta})$ 表示策略网络， $\left(\pi_{r e f}\right)$ 表示参考策略， $\left(o_{i, t}\right)$ 表示在时间 $(t)$ 的观测，$(q)$ 和 $\left(o_{i,<t}\right.$ ）分别表示上下文和历史观测。令 $\left(r=\frac{\pi_{r e f}\left(o_{i, t} \mid q, o_{i,<t}\right)}{\pi_\theta\left(o_{i, t} \mid q, o_{i,<t}\right)}\right)$ ，该估计器可重写为：
 
 $$
 k_3=(r-1)-\log r
