@@ -98,7 +98,7 @@ $$
 
 或者如果用的是优势函数 $A_w(s, a)=Q_w(s, a)-V_w(s)$ ，则 Critic 可能是更新 $V$ 。这时
 $$
-A\left(s_t, a_t\right)=r_t+\gamma V_w\left(s_{t+1}\right)-V_w\left(s_t\right)
+A\left(s_t, a_t)=r_t+\gamma V_w\left(s_{t+1})-V_w\left(s_t)
 $$
 
 这里利用了贝尔曼方程：
