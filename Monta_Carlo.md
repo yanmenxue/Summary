@@ -97,10 +97,13 @@ w \leftarrow w+\alpha_w \delta_t \nabla_w Q_w\left(s_t, a_t\right)
 $$
 
 (使用半梯度，将 $Q_w\left(s_{t+1}, a_{t+1}\right)$ 看作是常数，不去计算这部分关于w的梯度)
+
 在代码中通常这样处理（.detach()，这就是在告诉自动微分系统：不要计算目标值的梯度），
+
 计算TD误差
 td_target = reward + gamma * value_net(next_state).detach()
 td_error = td_target - value_net(current_state)
+
 损失函数
 value_loss = 0.5 * (td_error ** 2).mean()
 
