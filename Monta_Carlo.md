@@ -116,7 +116,7 @@ $$
 A\left(s_t, a_t\right)=r_t+\gamma V_w\left(s_{t+1}\right)-V_w\left(s_t\right)
 $$
 
-最小化优势函数来优化$V_w$.
+最小化优势函数来优化 $V_w$.
 
 1.2.2 Actor 更新（策略梯度）：
 
