@@ -74,14 +74,15 @@ $$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
 
 # Actor－Critic 算法
 Actor－Critic 结合了策略梯度（Actor）和价值函数（Critic）两个部分。
-1.1 主要符号
+
+1 主要符号
 - $\pi_\theta(a \mid s)$ ：参数为 $\theta$ 的策略（Actor）
 - $Q_w(s, a)$ ：参数为 $w$ 的动作价值函数（Critic）
 - 状态 $s_t$ ，动作 $a_t$ ，奖励 $r_t$ ，折扣因子 $\gamma$
 
-1.2 算法流程
+2 算法流程
 
-1.2.1 Critic更新（用 TD 误差更新 $Q_w$ ）
+2.1 Critic更新（用 TD 误差更新 $Q_w$ ）
 TD 误差：
 
 $$
@@ -118,7 +119,7 @@ $$
 
 最小化优势函数来优化 $V_w$.
 
-1.2.2 Actor 更新（策略梯度）：
+2.2 Actor 更新（策略梯度）：
 
 $$
 \theta \leftarrow \theta+\alpha_\theta \nabla_\theta \log \pi_\theta\left(a_t \mid s_t\right) Q_w\left(s_t, a_t\right)
