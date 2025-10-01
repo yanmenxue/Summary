@@ -96,11 +96,12 @@ w \leftarrow w+\alpha_w \delta_t \nabla_w Q_w\left(s_t, a_t\right)
 $$
 
 
-或者如果用的是优势函数 $A_w(s, a)=Q_w(s, a)-V_w(s)$ ，则 Critic 可能是更新 $V$ 。这时
+或者如果用的是优势函数 $A_w(s, a)=Q_w(s, a)-V_w(s)$ ，则 Critic 可能是更新 $V$ 。
 
 $$
-A\left(s_t, a_t)=r_t+\gamma V_w\left(s_{t+1})-V_w\left(s_t)
+A\left(s_t, a_t\right)=r_t+\gamma V_w\left(s_{t+1}\right)-V_w\left(s_t\right)
 $$
+
 
 这里利用了贝尔曼方程：
 
@@ -108,7 +109,9 @@ $$
 Q\left(s_t, a_t\right)=\mathbb{E}\left[r_t+\gamma V\left(s_{t+1}\right)\right]
 $$
 
+
 所以：
+
 $$
 A\left(s_t, a_t\right)=r_t+\gamma V_w\left(s_{t+1}\right)-V_w\left(s_t\right)
 $$
