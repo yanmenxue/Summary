@@ -72,31 +72,9 @@ $$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
 
 7.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
 
-## 1．AC算法和SAC算法##
-状态价值函数：
-
-$$
-V^\pi(s)=\mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t r_t \mid s_0=s, \pi\right]
-$$
-
-
-动作价值函数：
-
-$$
-Q^\pi(s, a)=\mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t r_t \mid s_0=s, a_0=a, \pi\right]
-$$
-
-
-2．TD误差（Temporal Difference Error）
-
-$$
-\delta_t=r_t+\gamma V_\phi\left(s_{t+1}\right)-V_\phi\left(s_t\right)
-$$
-
-
-3．参数更新公式
-Critic 更新（价值函数拟合）：
-
-$$
-\phi \leftarrow \phi+\alpha_c \delta_t \nabla_\phi V_\phi\left(s_t\right)
-$$
+# Actor－Critic 算法
+Actor－Critic 结合了策略梯度（Actor）和价值函数（Critic）两个部分。
+1.1 主要符号
+- $\pi_\theta(a \mid s)$ ：参数为 $\theta$ 的策略（Actor）
+- $Q_w(s, a)$ ：参数为 $w$ 的动作价值函数（Critic）
+- 状态 $s_t$ ，动作 $a_t$ ，奖励 $r_t$ ，折扣因子 $\gamma$
