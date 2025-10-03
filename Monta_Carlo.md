@@ -1,4 +1,4 @@
-## Monta Carlo
+## Monta Carlo算法
 $\int p(x) f(x) dx = E_{x \sim p(x)} f(x) = \frac{\sum_{i=1}^n f(x_i)}{n}$ (大数定律) if we sample $x_i$, i = 1,2,...,n from p(x) 
 
 if we sample $x_i$ from $p_1(x)$, we can estimate $E_{x \sim p_2(x)} f(x)$ as follows:  
@@ -7,7 +7,8 @@ $E_{x \sim p_2(x)} f(x) = \int p_2(x) f(x) dx = \int p_1(x) \frac{p_2(x)}{p_1(x)
 
 so in ppo or grpo, we use data from old policy to optimize new policy, and we need the item $\frac{p_{new}(x)}{p{old}(x)}$  
 
-# What is the target for training?
+# PPO算法
+## What is the target for training?
 
 We need a target value $V_{\text{target}}(s_t)$ to train our network against. The best target we can use is the actual return we experienced from state $s_t$, which we can compute from the trajectory:
 
