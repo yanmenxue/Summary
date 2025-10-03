@@ -8,7 +8,7 @@ $E_{x \sim p_2(x)} f(x) = \int p_2(x) f(x) dx = \int p_1(x) \frac{p_2(x)}{p_1(x)
 so in ppo or grpo, we use data from old policy to optimize new policy, and we need the item $\frac{p_{new}(x)}{p{old}(x)}$  
 
 # PPO算法
-## What is the target for training?
+## 1.What is the target for training?
 
 We need a target value $V_{\text{target}}(s_t)$ to train our network against. The best target we can use is the actual return we experienced from state $s_t$, which we can compute from the trajectory:
 
@@ -22,7 +22,7 @@ In practice, for stability, we often use a mix of these ideas, like the n-step r
 
 $$V_{\text{target}}(s_t) = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \ ... \ + \gamma^n V(s_{t+n})$$
 
-## Training Loop:
+# Training Loop:
 
 1.  **Collect** a trajectory of experiences $(s_t, a_t, r_t, s_{t+1})$.
 2.  For each state $s_t$, **compute the target** $V_{\text{target}}(s_t)$ using one of the methods above.
@@ -43,10 +43,10 @@ $$Q^{\pi}(s_t, a_t) = A^{\pi}(s_t, a_t) + V^{\pi}(s_t)$$
 
 So, if we have a good estimate for $V(s_t)$ (from our value network) and a good way to estimate the advantage $A(s_t, a_t)$ (e.g., using GAE), we can implicitly get the Q-value.
 
-## Why is this preferred?
+# Why is this preferred?
 Estimating a single value function $V(s)$ is simpler and more data-efficient than estimating a Q-function $Q(s, a)$ for every possible action in every state. This is a key reason for the success of Actor-Critic methods.
 
-## Practical Workflow in PPO (with GAE)
+# 3.Practical Workflow in PPO (with GAE)
 Here is the complete, step-by-step process for how $V$ and the implied $Q$ are computed and used in a standard PPO implementation:
 
 1.  **Collect Data:** Roll out the current policy for N steps (e.g., 2048 steps in a game), recording states, actions, rewards, and next-states.
@@ -73,7 +73,7 @@ $$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
 
 7.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
 
-# Actor－Critic 算法
+## Actor－Critic 算法
 Actor－Critic 结合了策略梯度（Actor）和价值函数（Critic）两个部分。
 
 1 主要符号
