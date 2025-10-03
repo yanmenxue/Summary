@@ -1,4 +1,4 @@
-## Monta Carlo算法
+# Monta Carlo算法
 $\int p(x) f(x) dx = E_{x \sim p(x)} f(x) = \frac{\sum_{i=1}^n f(x_i)}{n}$ (大数定律) if we sample $x_i$, i = 1,2,...,n from p(x) 
 
 if we sample $x_i$ from $p_1(x)$, we can estimate $E_{x \sim p_2(x)} f(x)$ as follows:  
@@ -22,7 +22,7 @@ In practice, for stability, we often use a mix of these ideas, like the n-step r
 
 $$V_{\text{target}}(s_t) = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \ ... \ + \gamma^n V(s_{t+n})$$
 
-# Training Loop:
+## Training Loop:
 
 1.  **Collect** a trajectory of experiences $(s_t, a_t, r_t, s_{t+1})$.
 2.  For each state $s_t$, **compute the target** $V_{\text{target}}(s_t)$ using one of the methods above.
@@ -31,7 +31,7 @@ $$V_{\text{target}}(s_t) = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \ ... \ + \
 
 Your value network's prediction $V_{\phi}(s_t)$ is your estimate for $V(s_t)$.
 
-# 2. Computing the Action-Value Function $Q(s_t, a_t)$
+## 2. Computing the Action-Value Function $Q(s_t, a_t)$
 
 $Q^{\pi}(s_t, a_t)$ is the expected total discounted reward from taking action $a_t$ in state $s_t$ and then following policy $\pi$ thereafter.
 
@@ -43,10 +43,10 @@ $$Q^{\pi}(s_t, a_t) = A^{\pi}(s_t, a_t) + V^{\pi}(s_t)$$
 
 So, if we have a good estimate for $V(s_t)$ (from our value network) and a good way to estimate the advantage $A(s_t, a_t)$ (e.g., using GAE), we can implicitly get the Q-value.
 
-# Why is this preferred?
+## Why is this preferred?
 Estimating a single value function $V(s)$ is simpler and more data-efficient than estimating a Q-function $Q(s, a)$ for every possible action in every state. This is a key reason for the success of Actor-Critic methods.
 
-# 3.Practical Workflow in PPO (with GAE)
+## 3.Practical Workflow in PPO (with GAE)
 Here is the complete, step-by-step process for how $V$ and the implied $Q$ are computed and used in a standard PPO implementation:
 
 1.  **Collect Data:** Roll out the current policy for N steps (e.g., 2048 steps in a game), recording states, actions, rewards, and next-states.
@@ -73,7 +73,7 @@ $$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
 
 7.  **Update the Policy Network (Actor):** Use the advantages $A_t$ to update the policy, telling it which actions were good (positive advantage) and which were bad (negative advantage). The PPO clipping objective ensures this update is stable.
 
-## Actor－Critic 算法
+# Actor－Critic 算法
 Actor－Critic 结合了策略梯度（Actor）和价值函数（Critic）两个部分。
 
 1 主要符号
