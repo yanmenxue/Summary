@@ -187,6 +187,15 @@ $$
 Q\left(s_t, a_t\right)=R\left(s_t, a_t, s_{t+1}\right)+\gamma \mathbb{E}_{s_{t+1}}\left[V\left(s_{t+1}\right)\right]
 $$
 
-
 3．价值函数与 Q 函数的关系：
 将熵的定义代入 $V$ 函数，我们可以得到 $V$ 和 $Q$ 之间的关键关系：
+
+$$
+\begin{aligned}
+V\left(s_t\right) & =\mathbb{E}_{a_t \sim \pi}\left[Q\left(s_t, a_t\right)-\alpha \log \pi\left(a_t \mid s_t\right)\right] \\
+& =\mathbb{E}_{a_t \sim \pi}\left[Q\left(s_t, a_t\right)\right]+\alpha \mathcal{H}\left(\pi\left(\cdot \mid s_t\right)\right)
+\end{aligned}
+$$
+
+
+这个公式是 SAC 的基石，它说明一个状态的价值等于该状态下所有动作的 Q 值的期望，再加上策略的熵。
