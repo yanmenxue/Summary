@@ -81,9 +81,9 @@ Actor－Critic 结合了策略梯度（Actor）和价值函数（Critic）两个
 - $Q_w(s, a)$ ：参数为 $w$ 的动作价值函数（Critic）
 - 状态 $s_t$ ，动作 $a_t$ ，奖励 $r_t$ ，折扣因子 $\gamma$
 
-2 算法流程
+## 2 算法流程
 
-2.1 Critic更新（用 TD 误差更新 $Q_w$ ）
+### 2.1 Critic更新（用 TD 误差更新 $Q_w$ ）
 TD 误差：
 
 $$
@@ -134,7 +134,7 @@ $$
 
 最小化优势函数来优化 $V_w$.
 
-2.2 Actor 更新（策略梯度）：
+### 2.2 Actor 更新（策略梯度）：
 
 $$
 \theta \leftarrow \theta+\alpha_\theta \nabla_\theta \log \pi_\theta\left(a_t \mid s_t\right) Q_w\left(s_t, a_t\right)
@@ -146,3 +146,47 @@ $$
 $$
 \theta \leftarrow \theta+\alpha_\theta \nabla_\theta \log \pi_\theta\left(a_t \mid s_t\right) A_w\left(s_t, a_t\right)
 $$
+
+
+# Soft Actor-Critic (SAC) 算法
+
+## 1．核心思想：最大嫡目标
+标准强化学习的目标是最大化期望累积回报：
+
+$$
+J(\pi)=\mathbb{E}_{\tau \sim \pi}\left[\sum_{t=0}^{\infty} \gamma^t R\left(s_t, a_t, s_{t+1}\right)\right]
+$$
+
+
+SAC 在此基础上，为每一步的策略都增加一个熵项：
+
+$$
+J(\pi)=\mathbb{E}_{\tau \sim \pi}\left[\sum_{t=0}^{\infty} \gamma^t\left(R\left(s_t, a_t, s_{t+1}\right)+\alpha \mathcal{H}\left(\pi\left(\cdot \mid s_t\right)\right)\right)\right]
+$$
+
+
+其中：
+- $\tau$ 是由策略 $\pi$ 采样得到的轨迹 $\left(s_0, a_0, s_1, a_1, \ldots\right)$ 。
+- $\alpha>0$ 是一个温度参数，它决定了熵项相对于奖励的重要性。
+-  $\mathcal{H}\left(\pi\left(\cdot \mid s_t\right)\right)$ 是策略在状态 $s_t$ 下的熵，定义为：
+
+## 2．价值函数与 Q 函数
+在最大熵框架下，价值函数和 Q 函数的定义也包含了末来的熵。
+1．软状态价值函数（Soft State－Value Function）$V\left(s_t\right)$ ：
+它衡量从状态 $s_t$ 开始，遵循策略 $\pi$ 所能得到的期望累积软回报。
+
+$$
+V\left(s_t\right)=\mathbb{E}_{\tau \sim \pi, s_0=s_t}\left[\sum_{l=t}^{\infty} \gamma^{l-t}\left(R\left(s_l, a_l, s_{l+1}\right)+\alpha \mathcal{H}\left(\pi\left(\cdot \mid s_l\right)\right)\right)\right]
+$$
+
+
+2．软动作价值函数（Soft Action－Value Function）$Q\left(s_t, a_t\right)$ ：
+它衡量在状态 $s_t$ 执行动作 $a_t$ 后，再遵循策略 $\pi$ 所能得到的期望累积软回报。
+
+$$
+Q\left(s_t, a_t\right)=R\left(s_t, a_t, s_{t+1}\right)+\gamma \mathbb{E}_{s_{t+1}}\left[V\left(s_{t+1}\right)\right]
+$$
+
+
+3．价值函数与 Q 函数的关系：
+将熵的定义代入 $V$ 函数，我们可以得到 $V$ 和 $Q$ 之间的关键关系：
