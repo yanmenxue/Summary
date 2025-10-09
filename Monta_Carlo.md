@@ -199,3 +199,85 @@ $$
 
 
 这个公式是 SAC 的基石，它说明一个状态的价值等于该状态下所有动作的 Q 值的期望，再加上策略的熵。
+
+## 3．软策略迭代（Soft Policy Iteration）
+
+SAC 的理论基础是软策略迭代，它类似于标准的策略迭代，但适用于最大熵目标。
+
+软策略评估（Soft Policy Evaluation）：
+
+对于固定的策略 $\pi$ ，软 Q 函数可以通过反复应用软贝尔曼备份算子 $\mathcal{T}^\pi$ 来收敛到该策略的真
+
+$$
+\mathcal{T}^\pi Q\left(s_t, a_t\right) \triangleq R\left(s_t, a_t, s_{t+1}\right)+\gamma \mathbb{E}_{s_{t+1}}\left[V\left(s_{t+1}\right)\right]
+$$
+
+
+其中 $V\left(s_{t+1}\right)=\mathbb{E}_{a_{t+1} \sim \pi}\left[Q\left(s_{t+1}, a_{t+1}\right)-\alpha \log \pi\left(a_{t+1} \mid s_{t+1}\right)\right]$ 。
+
+软策略改进（Soft Policy Improvement）：
+
+对于给定的 Q 函数，我们通过最小化 KL 散度来更新策略，使其更接近一个以 Q 值为指数的布。
+
+$$
+\pi_{\mathrm{new}}=\arg \min _{\pi^{\prime}} D_{K L}\left(\pi^{\prime}\left(\cdot \mid s_t\right) \| \frac{\exp \left(\frac{1}{\alpha} Q^{\pi_{\mathrm{old}}}\left(s_t, \cdot\right)\right)}{Z^{\pi_{\mathrm{old}}}\left(s_t\right)}\right)
+$$
+
+
+其中 $Z^{\pi_{\mathrm{old}}}\left(s_t\right)$ 是一个配分函数，用于对分布进行归一化。这个更新的解析解表明，新的策略高的动作上会有更高的概率。
+
+## 4．Soft Actor－Critic 的实践实现
+
+在实际中，SAC 使用函数近似（神经网络）并同时学习三个网络：策略网络 $\pi_\phi$ 和两个 Q 网络 $Q_{\theta_1}, Q_{\theta_2}$ （用于缓解过高估计）。它遵循 Actor－Critic 架构。
+
+A．软 Q 函数（Critic）的更新
+
+我们通过最小化软贝尔曼误差来更新 Q 网络的参数 $\theta$ 。
+
+目标 Q 值：
+
+$$
+y\left(r, s^{\prime}, d\right)=r+\gamma(1-d)\left(\min _{i=1,2} Q_{\bar{\theta}_i}\left(s^{\prime}, \tilde{a}^{\prime}\right)-\alpha \log \pi_\phi\left(\tilde{a}^{\prime} \mid s^{\prime}\right)\right), \quad \tilde{a}^{\prime} \sim \pi_\phi\left(\cdot \mid s^{\prime}\right)
+$$
+
+
+其中：
+－$r=R\left(s, a, s^{\prime}\right)$
+- $d$ 表示是否为终止状态（done flag）。
+- $\tilde{a}^{\prime}$ 是从当前策略 $\pi_\phi$ 中为新状态 $s^{\prime}$ 采样的动作。
+- $Q_{\bar{\theta}}$ 是目标 Q 网络，其参数 $\bar{\theta}$ 是主 Q 网络参数的指数移动平均（EMA），用于稳定训练。
+损失函数：
+对于两个 Q 网络 $i=1,2$ ，其损失函数为：
+
+$$
+J_Q\left(\theta_i\right)=\mathbb{E}_{\left(s, a, r, s^{\prime}, d\right) \sim \mathcal{D}}\left[\frac{1}{2}\left(Q_{\theta_i}(s, a)-y\left(r, s^{\prime}, d\right)\right)^2\right]
+$$
+
+
+这里 $\mathcal{D}$ 是经验回放缓冲区。
+
+B．策略函数（Actor）的更新
+
+策略的更新目标是最大化期望的 Q 值同时保持高熵。我们通过最小化 KL 散度来更新策略参数 $\phi$ 。
+根据软策略改进的推导，策略的损失函数可以写为：
+
+$$
+J_\pi(\phi)=\mathbb{E}_{s_t \sim \mathcal{D}}\left[D_{K L}\left(\pi_\phi\left(\cdot \mid s_t\right) \| \frac{\exp \left(\frac{1}{\alpha} Q_\theta\left(s_t, \cdot\right)\right)}{Z_\theta\left(s_t\right)}\right)\right]
+$$
+
+
+为了便于计算，我们使用重参数化技巧（Re－parameterization Trick）。我们从策略中采样动作：
+
+$$
+\tilde{a}_t=f_\phi\left(\epsilon_t ; s_t\right)
+$$
+
+
+其中 $\epsilon_t$ 是来自某个固定分布（如高斯分布）的噪声。通过这种参数化，损失函数可以近似为：
+
+$$
+J_\pi(\phi)=\mathbb{E}_{s_t \sim \mathcal{D}, \epsilon_t \sim \mathcal{N}}\left[\alpha \log \pi_\phi\left(f_\phi\left(\epsilon_t ; s_t\right) \mid s_t\right)-\min _{i=1,2} Q_{\theta_i}\left(s_t, f_\phi\left(\epsilon_t ; s_t\right)\right)\right]
+$$
+
+
+直观理解：这个损失函数鼓励策略 $\pi_\phi$ 选择能使得 $Q$ 值最大化的动作（第二项），但同时要保证自身的熵足够大（第一项，因为 $\log \pi$ 与熵直接相关）。
