@@ -120,7 +120,7 @@ $$
 为了便于计算，我们使用重参数化技巧（Re－parameterization Trick）。我们从策略中采样动作：
 
 $$
-\tilde{a}_t=f_\phi\left(\epsilon_t ; s_t\right)
+\tilde{a}_t=f_ left(\epsilon_t ; s_t\right)
 $$
 
 
@@ -130,6 +130,7 @@ $$
 J_\pi(\phi)=\mathbb{E}_{s_t \sim \mathcal{D}, \epsilon_t \sim \mathcal{N}}\left[\alpha \log \pi_\phi\left(f_\phi\left(\epsilon_t ; s_t\right) \mid s_t\right)-\min _{i=1,2} Q_{\theta_i}\left(s_t, f_\phi\left(\epsilon_t ; s_t\right)\right)\right]
 $$
 
+注意，我们不直接从 $\pi_\phi(|s_t)$ 中采样 $a_t$, 而是分离随机性，从一个简单的与 $\phi$ 无关的分布中采样（如正态分布），然后，我们通过一个由 $\phi$ 参数化的、确定性的、可微的函数，将状态 $s_t$ 和噪声 $\epsilon_t$ 映射为最终的动作 $a_t$。
 
 直观理解：这个损失函数鼓励策略 $\pi_\phi$ 选择能使得 $Q$ 值最大化的动作（第二项），但同时要保证自身的熵足够大（第一项，因为 $\log \pi$ 与熵直接相关）。
 
