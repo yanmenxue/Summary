@@ -172,7 +172,8 @@ $$
 
 ## 2．价值函数与 Q 函数
 在最大熵框架下，价值函数和 Q 函数的定义也包含了末来的熵。
-1．软状态价值函数（Soft State－Value Function）$V\left(s_t\right)$ ：
+
+1．软状态价值函数（Soft State－Value Function） $V\left(s_t\right)$ ：
 它衡量从状态 $s_t$ 开始，遵循策略 $\pi$ 所能得到的期望累积软回报。
 
 $$
