@@ -120,7 +120,7 @@ $$
 为了便于计算，我们使用重参数化技巧（Re－parameterization Trick）。我们从策略中采样动作：
 
 $$
-\tilde{a}_t=f_left(\epsilon_t ; s_t\right)
+\tilde{a}_t=f_\phi(\epsilon_t ; s_t)
 $$
 
 
