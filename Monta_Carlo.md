@@ -76,7 +76,7 @@ $$L_{critic}(\phi) = \frac{1}{N}\sum_t (\hat{R}_t - V_{\phi}(s_t))^2$$
 # Actor－Critic 算法
 Actor－Critic 结合了策略梯度（Actor）和价值函数（Critic）两个部分。
 
-1 主要符号
+## 1 主要符号
 - $\pi_\theta(a \mid s)$ ：参数为 $\theta$ 的策略（Actor）
 - $Q_w(s, a)$ ：参数为 $w$ 的动作价值函数（Critic）
 - 状态 $s_t$ ，动作 $a_t$ ，奖励 $r_t$ ，折扣因子 $\gamma$
