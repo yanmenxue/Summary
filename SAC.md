@@ -81,7 +81,7 @@ $$
 
 在实际中，SAC 使用函数近似（神经网络）并同时学习三个网络：策略网络 $\pi_\phi$ 和两个 Q 网络 $Q_{\theta_1}, Q_{\theta_2}$ （用于缓解过高估计）。它遵循 Actor－Critic 架构。
 
-A．软 Q 函数（Critic）的更新
+### A．软 Q 函数（Critic）的更新
 
 我们通过最小化软贝尔曼误差来更新 Q 网络的参数 $\theta$ 。
 
@@ -107,7 +107,7 @@ $$
 
 这里 $\mathcal{D}$ 是经验回放缓冲区。
 
-B．策略函数（Actor）的更新
+### B．策略函数（Actor）的更新
 
 策略的更新目标是最大化期望的 Q 值同时保持高熵。我们通过最小化 KL 散度来更新策略参数 $\phi$ 。
 根据软策略改进的推导，策略的损失函数可以写为：
@@ -151,16 +151,14 @@ D_{K L} & =\mathbb{E}_{a \sim \pi_\phi}\left[\log \pi_\phi\left(a \mid s_t\right
 \end{aligned}
 $$
 
-
-2．分离与策略参数 $\phi$ 相关的项
-现在我们得到了KL散度的完整表达式：
+通过分离与策略参数 $\phi$ 相关的项，现在我们得到了KL散度的完整表达式：
 
 $$
 D_{K L}=\mathbb{E}_{a \sim \pi_\phi}\left[\log \pi_\phi\left(a \mid s_t\right)\right]-\frac{1}{\alpha} \mathbb{E}_{a \sim \pi_\phi}\left[Q_\theta\left(s_t, a\right)\right]+\log Z_\theta\left(s_t\right)
 $$
 
 
-C．温度参数 $\alpha$ 的自动调节
+### C．温度参数 $\alpha$ 的自动调节
 手动调节温度参数 $\alpha$ 很困难。SAC 通常将其设定为一个可优化的目标，以使得策略的平均熵维持在一个目标值 $\overline{\mathcal{H}}$（通常是 $-dim(\mathcal{A})$ ，即动作维度的负数）附近。
 
 我们通过最小化关于 $\alpha$ 的损失函数来实现：
