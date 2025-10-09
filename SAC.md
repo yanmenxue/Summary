@@ -133,8 +133,34 @@ $$
 
 直观理解：这个损失函数鼓励策略 $\pi_\phi$ 选择能使得 $Q$ 值最大化的动作（第二项），但同时要保证自身的熵足够大（第一项，因为 $\log \pi$ 与熵直接相关）。
 
+推导： 
+
+$$
+D_{K L}\left(\pi_\phi \| \pi_{\text {target }}\right)=\mathbb{E}_{a \sim \pi_\phi\left(\cdot \mid s_t\right)}\left[\log \pi_\phi\left(a \mid s_t\right)-\log \pi_{\text {target }}\left(a \mid s_t\right)\right]
+$$
+
+
+将我们的目标分布 $\pi_{\text {target }}=\frac{\exp \left(\frac{1}{\alpha} Q_\theta\left(s_t, a\right)\right)}{Z_\theta\left(s_t\right)}$ 代入：
+
+$$
+\begin{aligned}
+D_{K L} & =\mathbb{E}_{a \sim \pi_\phi}\left[\log \pi_\phi\left(a \mid s_t\right)-\log \left(\frac{\exp \left(\frac{1}{\alpha} Q_\theta\left(s_t, a\right)\right)}{Z_\theta\left(s_t\right)}\right)\right] \\
+& =\mathbb{E}_{a \sim \pi_\phi}\left[\log \pi_\phi\left(a \mid s_t\right)-\left(\frac{1}{\alpha} Q_\theta\left(s_t, a\right)-\log Z_\theta\left(s_t\right)\right)\right] \\
+& =\mathbb{E}_{a \sim \pi_\phi}\left[\log \pi_\phi\left(a \mid s_t\right)-\frac{1}{\alpha} Q_\theta\left(s_t, a\right)+\log Z_\theta\left(s_t\right)\right]
+\end{aligned}
+$$
+
+
+2．分离与策略参数 $\phi$ 相关的项
+现在我们得到了KL散度的完整表达式：
+
+$$
+D_{K L}=\mathbb{E}_{a \sim \pi_\phi}\left[\log \pi_\phi\left(a \mid s_t\right)\right]-\frac{1}{\alpha} \mathbb{E}_{a \sim \pi_\phi}\left[Q_\theta\left(s_t, a\right)\right]+\log Z_\theta\left(s_t\right)
+$$
+
+
 C．温度参数 $\alpha$ 的自动调节
-手动调节温度参数 $\alpha$ 很困难。SAC 通常将其设定为一个可优化的目标，以使得策略的平均熵维持在一个目标值 $\overline{\mathcal{H}}$（通常是 $-\operatorname{dim}(\mathcal{A})$ ，即动作维度的负数）附近。
+手动调节温度参数 $\alpha$ 很困难。SAC 通常将其设定为一个可优化的目标，以使得策略的平均熵维持在一个目标值 $\overline{\mathcal{H}}$（通常是 $-dim(\mathcal{A})$ ，即动作维度的负数）附近。
 
 我们通过最小化关于 $\alpha$ 的损失函数来实现：
 
